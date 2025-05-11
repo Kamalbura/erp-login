@@ -88,6 +88,7 @@ body {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <!-- Add login handler script -->
     <script src="login-handler.js"></script>
+    <script src="motivation.js"></script>
     <script>
         // Initialize login form handling
         document.addEventListener('DOMContentLoaded', function() {
@@ -115,12 +116,71 @@ body {
                         messageEl.style.color = response.color;
                         
                         if (response.success) {
-                            // Redirect to dashboard after delay
+                            // Create and show video overlay
+                            const videoOverlay = document.createElement('div');
+                            videoOverlay.style.position = 'fixed';
+                            videoOverlay.style.top = '0';
+                            videoOverlay.style.left = '0';
+                            videoOverlay.style.width = '100%';
+                            videoOverlay.style.height = '100%';
+                            videoOverlay.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                            videoOverlay.style.zIndex = '9999';
+                            videoOverlay.style.display = 'flex';
+                            videoOverlay.style.justifyContent = 'center';
+                            videoOverlay.style.alignItems = 'center';
+                            videoOverlay.style.flexDirection = 'column';
+                            
+                            // Create video element
+                            const video = document.createElement('video');
+                            video.src = 'video.mp4';
+                            video.style.maxWidth = '90%';
+                            video.style.maxHeight = '80%';
+                            video.controls = true;
+                            video.autoplay = true;
+                            
+                            // Add message below video
+                            const message = document.createElement('div');
+                            message.textContent = "Students & Friends, all the best for your future! 🌟";
+                            message.style.color = 'white';
+                            message.style.marginTop = '20px';
+                            message.style.fontSize = '24px';
+                            
+                            // Add close button
+                            const closeButton = document.createElement('button');
+                            closeButton.textContent = '×';
+                            closeButton.style.position = 'absolute';
+                            closeButton.style.top = '20px';
+                            closeButton.style.right = '20px';
+                            closeButton.style.background = 'none';
+                            closeButton.style.border = 'none';
+                            closeButton.style.color = 'white';
+                            closeButton.style.fontSize = '28px';
+                            closeButton.style.cursor = 'pointer';
+                            closeButton.onclick = () => {
+                                document.body.removeChild(videoOverlay);
+                                window.location.href = response.redirectUrl;
+                            };
+                            
+                            // Add elements to overlay
+                            videoOverlay.appendChild(video);
+                            videoOverlay.appendChild(message);
+                            videoOverlay.appendChild(closeButton);
+                            document.body.appendChild(videoOverlay);
+                            
+                            // Handle video ending
+                            video.onended = () => {
+                                setTimeout(() => {
+                                    document.body.removeChild(videoOverlay);
+                                    window.location.href = response.redirectUrl;
+                                }, 1000);
+                            };
+                            
+                            // Set timeout as fallback
                             setTimeout(() => {
-                                window.location.href = response.redirectUrl; // Open in same tab
-                                // Re-enable button after redirect
-                                submitButton.disabled = false;
-                            }, 1500);
+                                if (document.body.contains(videoOverlay)) {
+                                    submitButton.disabled = false;
+                                }
+                            }, 30000); // Enable button after 30 seconds as failsafe
                         }
                     })
                     .catch(error => {
