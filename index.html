@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style type="text/css">
+        html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 0px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+    </style>
+<title>
+ERP Login
+</title></head>
+<main class="form-signin">
+    <form method="post" action="./Default.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="GKXhjNaQX3KLN859QF5+QK/sXoavMVWJVYYvjwl1XCcP0P/RIh+uJbLyAUcsjR99itN9H6ca6av+6urExTVqfgMSMmHlA57K44slr2Hc2Aw=">
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="7F9E2B5A">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="m3h2xD9HI5FQrG/ugw0ZBYxq7LmkXEyF64JMsAzZH9gYu2tLmLKyhJgi/d3CQBgUqFaAlzoNb5fxmyaehpKz6K7vOU8voU2zziMWJP+wx11PAeUMyL1i6F6iTzlC9gM02x6o+o6J1m1PWE7XG6rKMyD/5XuGcePj84T7lmqBx31WbygKG9aqVYPK11TqiK25w6Oa0DdvCvqOgnTXqMKIuA==">
+</div>
+
+
+        <img class="mb-4" src="https://vce.ac.in/img/vlogo.gif" alt="" width="135" height="100">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <!--<input name="txtHTNO" type="text" id="txtHTNO" class="form-control" placeholder="1602-20-736-001" /> -->
+        <input name="txt_HTNO" type="text" id="txt_HTNO" class="form-control">
+
+      <label for="floatingInput">HTNO</label>
+    </div>
+    <div class="form-floating">
+    <!--  <input name="txtPassword" type="password" id="txtPassword" class="form-control" placeholder="Password" />-->
+          <input name="txt_Password" type="password" id="txt_Password" class="form-control">
+        <label for="floatingPassword">Password</label>
+
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+          <span id="lblMessage"></span>
+        <!--<input type="checkbox" value="remember-me"> Remember me-->
+      </label>
+    </div>
+        <input type="submit" name="btn_Login" value="Sign in" id="btn_Login" class="w-100 btn btn-lg btn-primary"> 
+    <p class="mt-5 mb-3 text-muted">© 2017–2024</p>
+
+
+
+
+
+     
+    </form>
+        </main><body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body></html>
