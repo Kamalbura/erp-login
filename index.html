@@ -117,7 +117,7 @@ body {
                         if (response.success) {
                             // Redirect to dashboard after delay
                             setTimeout(() => {
-                                window.open(response.redirectUrl, "_blank");
+                                window.location.href = response.redirectUrl; // Open in same tab
                                 // Re-enable button after redirect
                                 submitButton.disabled = false;
                             }, 1500);
